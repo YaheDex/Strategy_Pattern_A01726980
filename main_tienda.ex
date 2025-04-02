@@ -88,3 +88,12 @@ defmodule Client3 do
     end
   end
 end
+
+# Initialize shop and clients
+shop = %Shop{}
+{shop, client1} = Client1.new(shop)
+{shop, client2} = Client2.new(shop)
+{shop, client3} = Client3.new(shop)
+
+# Update products in the shop
+shop = Shop.set_products(shop, 10, 20, 30)
