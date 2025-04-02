@@ -34,3 +34,57 @@ defmodule Shop do
     shop
   end
 end
+
+defmodule Client1 do
+  defstruct interested_products: []
+
+  def new(shop) do
+    client = %Client1{interested_products: [:product1]}
+    shop = shop |> Subject.register_observer(client)
+    {shop, client}
+  end
+
+  defimpl Observer do
+    def update(%Client1{interested_products: interests}, product1, product2, product3) do
+      if :product1 in interests do
+        IO.puts("Client1 is interested in product1. New amount: #{product1}")
+      end
+    end
+  end
+end
+
+defmodule Client2 do
+  defstruct interested_products: []
+
+  def new(shop) do
+    client = %Client2{interested_products: [:product2]}
+    shop = shop |> Subject.register_observer(client)
+    {shop, client}
+  end
+
+  defimpl Observer do
+    def update(%Client2{interested_products: interests}, product1, product2, product3) do
+      if :product2 in interests do
+        IO.puts("Client2 is interested in product2. New amount: #{product2}")
+      end
+    end
+  end
+end
+
+defmodule Client3 do
+  defstruct interested_products: []
+
+  def new(shop) do
+    client = %Client3{interested_products: [:product3]}
+    shop = shop |> Subject.register_observer(client)
+    {shop, client}
+  end
+
+  defimpl Observer do
+    def update(%Client3{interested_products: interests}, product1, product2, product3) do
+      if :product3 in interests do
+        IO.puts("Client3 is interested in product3. New amount: #{product3}")
+      end
+    end
+  end
+end
