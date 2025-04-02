@@ -22,3 +22,15 @@ defprotocol Observer do
   @doc "Defines the update method for observers."
   def update(observer, product1, product2, product3)
 end
+
+defmodule Shop do
+  use Subject
+
+  defstruct [:product1, :product2, :product3, observers: []]
+
+  def set_products(%__MODULE__{} = shop, product1, product2, product3) do
+    shop = %__MODULE__{shop | product1: product1, product2: product2, product3: product3}
+    notify_observers(shop, product1, product2, product3)
+    shop
+  end
+end
